@@ -9,7 +9,7 @@ pipeline {
           sh 'docker build -t ozge6943/argedortest:latest .'
       }
     }
-    stage('Docker Build') {
+    stage('Docker Push') {
       agent any
       steps {
           sh 'docker login -u $DockerHubUser -p $DockerHubPassword'
