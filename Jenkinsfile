@@ -16,16 +16,12 @@ pipeline {
           sh 'docker push ozge6943/argedortest:latest'
       }
     }
-    def remote = [:]
-    remote.name = 'test'
-    remote.host = '192.168.77.142'
-    remote.user = 'ozge'
-    remote.password = '1'
-    remote.allowAnyHosts = true
     stage('Docker Start') {
       agent any
       steps {
-          sshCommand remote: remote, command: "ls -lrt"
+          sh 'sshpass -p 1 ssh -t -t -o StrictHostKeyChecking=no ozge@192.168.77.142 uptime'
+          sh 'docker pull ozge6943/argedortest:latest'
+          sh 'docker run -d -p 3000:3000 argedortest ozge6943/argedortest'
       }
     }
   }
