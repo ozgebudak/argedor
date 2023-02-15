@@ -21,6 +21,8 @@ pipeline {
       steps {
           sh 'sshpass -p 1 ssh -t -t -o StrictHostKeyChecking=no ozge@192.168.77.142 uptime'
           sh 'docker pull ozge6943/argedortest:latest'
+          sh 'docker stop argedortest'
+          sh 'docker rm argedortest'
           sh 'docker run -d -p 3000:3000 --name argedortest ozge6943/argedortest'
       }
     }
